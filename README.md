@@ -28,6 +28,9 @@
 | 직렬화 | Newtonsoft.Json 3.2.2 |
 | NuGet | NuGetForUnity (`Assets/packages.config`) |
 
+Addressables 그룹은 `Local.ScriptableObjects` · `Local.UI` · `Remote.UI`(빈 예시) 셋으로 시작한다.
+`Remote.LoadPath`는 `<undefined>`다 — Offline이 기본이라 CDN 주소가 없다.
+
 폴더 구조는 `01_PROJECT_SETUP.md` §3을 그대로 따른다.
 
 ```
@@ -40,8 +43,11 @@ Assets/
 │   └── Scripts/               #   Commons · Constants · Contents · Cores · DI
 │                              #   Editor · Managers · ScriptableObjects · Utils
 ├── Plugins/
-└── StreamingAssets/aa/
+└── StreamingAssets/aa/          # Addressables Local 번들 출력
 ```
+
+`AddressableResources/`와 `Resources/`를 나누는 기준은 **Addressables로 로드하는가**다.
+`Resources/`는 통째로 빌드에 들어가므로, 번들에도 있는 에셋을 여기 두면 두 번 실린다.
 
 ## 들어 있지 않은 것 — 의도적이다
 
@@ -51,7 +57,7 @@ Assets/
 | Unity Localization · Cinemachine · Animation Rigging | `01_PROJECT_SETUP.md` §2의 코어 스택이지만 이 템플릿의 출처 프로젝트에 없었다. 버전을 지어내지 않고 비워 둔다 |
 | Protobuf | 소켓을 쓰는 프로젝트에서만 추가한다 |
 | Entities(ECS) · Purchasing · Cloud Build | 도메인 선택. 쓰는 프로젝트에서 추가하고 그 프로젝트의 04 문서에 기록한다 |
-| 씬 | `EditorBuildSettings`가 비어 있다. 첫 씬은 프로젝트에서 만든다 |
+| 씬 | `Bootstrapper.unity` 하나뿐이다. `ScenePathSO.Main`이 비어 있어 부트 후 전환할 씬이 없다 — 첫 씬을 만들고 채운다 |
 
 ## 버전 정책
 
