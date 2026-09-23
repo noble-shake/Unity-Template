@@ -46,7 +46,7 @@ namespace RottenNoble.Cores.Input
 
         public void OnPress(InputAction.CallbackContext context)
         {
-            if (!_inputEnabled) return;
+            if (_inputEnabled == false) return;
 
             if (context.started)
             {
@@ -61,14 +61,14 @@ namespace RottenNoble.Cores.Input
 
         public void OnPosition(InputAction.CallbackContext context)
         {
-            if (!_inputEnabled) return;
+            if (_inputEnabled == false) return;
             if (context.performed)
                 _touchPosition.Value = context.ReadValue<Vector2>();
         }
 
         public void OnDrag(InputAction.CallbackContext context)
         {
-            if (!_inputEnabled) return;
+            if (_inputEnabled == false) return;
             _dragDelta.Value = context.performed ? context.ReadValue<Vector2>() : Vector2.zero;
         }
 
@@ -77,7 +77,7 @@ namespace RottenNoble.Cores.Input
         public void SetInputEnabled(bool enabled)
         {
             _inputEnabled = enabled;
-            if (!enabled)
+            if (enabled == false)
             {
                 _touchPressed.Value = false;
                 _dragDelta.Value = Vector2.zero;

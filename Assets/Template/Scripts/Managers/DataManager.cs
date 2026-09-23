@@ -44,7 +44,7 @@ namespace RottenNoble.Cores.Manager
         /// </summary>
         public void UpdateRemoteResourcePath(string updateSourceJson)
         {
-            if (!string.IsNullOrEmpty(updateSourceJson))
+            if (string.IsNullOrEmpty(updateSourceJson) == false)
                 JsonConvert.PopulateObject(updateSourceJson, ResourcePath);
         }
     }

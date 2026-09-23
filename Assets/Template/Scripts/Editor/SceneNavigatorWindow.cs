@@ -166,7 +166,7 @@ namespace RottenNoble.Editor
 
             DrawSeparator(ColorWarningText * 0.4f);
 
-            if (!_showUnregistered) return;
+            if (_showUnregistered == false) return;
 
             foreach (var path in paths)
             {

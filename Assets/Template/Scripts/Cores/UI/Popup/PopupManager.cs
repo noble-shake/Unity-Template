@@ -55,7 +55,7 @@ namespace RottenNoble.Cores.UI.Popup
 
         public async UniTask HideAsync<T>(CancellationToken ct = default) where T : ViewBase
         {
-            if (!cache.TryGetValue(typeof(T), out var popup)) return;
+            if (cache.TryGetValue(typeof(T), out var popup) == false) return;
 
             await popup.HideAsync();
 

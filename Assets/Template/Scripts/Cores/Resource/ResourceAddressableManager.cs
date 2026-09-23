@@ -44,7 +44,7 @@ namespace RottenNoble.Cores.Resource
         public async UniTask<List<T>> LoadByLabelAsync<T>(string label, Action<string, float> onProgress = null) where T : UnityEngine.Object
         {
             var handle = Addressables.LoadAssetsAsync<T>((object)label, null);
-            if (!assetHandles.ContainsKey(label))
+            if (assetHandles.ContainsKey(label) == false)
                 assetHandles[label] = handle;
 
             while (!handle.IsDone)
@@ -98,7 +98,7 @@ namespace RottenNoble.Cores.Resource
         {
             if (instanceObject == null) return;
             int id = instanceObject.GetInstanceID();
-            if (!instancesById.TryGetValue(id, out var entry)) return;
+            if (instancesById.TryGetValue(id, out var entry) == false) return;
             entry.release?.Invoke(entry.instance);
             instancesById.Remove(id);
         }
@@ -119,7 +119,7 @@ namespace RottenNoble.Cores.Resource
         private void RegisterInstance(UnityEngine.Object obj, Action<UnityEngine.Object> release)
         {
             int id = obj.GetInstanceID();
-            if (!instancesById.ContainsKey(id))
+            if (instancesById.ContainsKey(id) == false)
                 instancesById[id] = (obj, release);
         }
     }

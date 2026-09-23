@@ -28,7 +28,7 @@ namespace RottenNoble.Cores.Provider
         private static string GetOrCreateDeviceId()
         {
             var id = UnityEngine.PlayerPrefs.GetString(DeviceIdKey, string.Empty);
-            if (!string.IsNullOrEmpty(id)) return id;
+            if (string.IsNullOrEmpty(id) == false) return id;
 
             id = System.Guid.NewGuid().ToString("N");
             UnityEngine.PlayerPrefs.SetString(DeviceIdKey, id);
